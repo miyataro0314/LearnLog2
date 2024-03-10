@@ -1,0 +1,53 @@
+<% content_for :title do %>
+  <title>DailyNotes | LearnLog2</title>
+<% end %>
+
+<%= stylesheet_link_tag 'daily_notes', media: 'all', 'data-turbo-track': 'reload' %>
+
+<div class="container pt-3 text-center">
+  <h1 class="mb-3">Daily Notes</h1>
+  <div class="mb-3 row justify-content-center">
+    <div class="col-10">
+      <div id="defaultSearchForm">
+        <%= render 'shared/search_date_form', q: @q, url: search_daily_notes_path %>
+      </div>
+      <div id="rangeSearchForm" style="display: none;">
+        <%= render 'shared/search_date_range_form', q: @q, url: search_daily_notes_path %>
+      </div>
+      <div class="text-end">
+        <input class="form-check-input" type="checkbox" value="" id="toggleCheckbox">
+        <label class="form-check-label" for="toggleCheckbox">
+          範囲検索
+        </label>
+      </div> 
+    </div>
+  </div>
+
+  <div id="daily-notes-container">
+    <div class="mb-3 text-end">
+      <%= "合計：#{current_user.daily_notes.count}件" %> 
+    </div>
+    <div class="row row-cols-4 g-2">
+      <%= render partial: 'daily_notes/daily_note_card', collection: @daily_notes, as: :daily_note %>
+    </div>
+    <%= paginate @daily_notes, theme: 'bootstrap-5' %>
+  </div>
+</div>
+
+<script>
+  var toggleCheckbox = document.getElementById('toggleCheckbox');
+  var defaultSearchForm = document.getElementById('defaultSearchForm');
+  var rangeSearchForm = document.getElementById('rangeSearchForm');
+
+  toggleCheckbox.addEventListener('change', function() {
+    if (this.checked) {
+      // チェックが入った時、デフォルトの検索フォームの内容を非表示にし、日付範囲検索フォームを表示する。
+      rangeSearchForm.style.display = '';
+      defaultSearchForm.style.display = 'none';
+    } else {
+      // チェックが外れた時、日付範囲検索フォームの内容を非表示にし、デフォルトの検索フォームを表示する。
+      rangeSearchForm.style.display = 'none';
+      defaultSearchForm.style.display = '';
+    }
+  });
+</script>

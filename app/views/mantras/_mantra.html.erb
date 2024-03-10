@@ -1,0 +1,14 @@
+<div class="mb-3 mt-3 row offset-1", id="mantra-<%= mantra.id %>">
+  <div class="col-3">
+    <%= mantra.author %>
+  </div>
+  <div class="col-6">
+    <%= mantra.body %>
+  </div>
+  <div class="col-auto">
+    <%= link_to 'Edit', edit_mantra_path(mantra), class: 'btn btn-outline-success', data: { turbo_stream: true } %>
+  </div>
+  <div class="col-auto">
+    <%= link_to 'Delete', mantra_path(mantra), class: 'btn btn-outline-danger', data: { turbo_stream: true, turbo_method: :delete, turbo_confirm: '削除してよろしいですか？' } %>
+  </div>
+</div>

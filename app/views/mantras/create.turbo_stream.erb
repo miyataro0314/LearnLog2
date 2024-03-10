@@ -1,0 +1,15 @@
+<%# 新規作成フォームの初期化 %>
+<%= turbo_stream.replace "mantra-form-", partial: "form", locals: { mantra: Mantra.new } %>
+
+<%# １つ目の作成の場合、mantras-containerごとreplace、2つ目以降の場合はmantras-containerにappend %>
+<% if current_user.mantras.count == 1 %>
+  <%= turbo_stream.replace "mantras-container" do %>
+    <div class="border row justify-content-center", id="mantras-container">
+      <%= render 'mantra', mantra: @mantra %>
+    </div>
+  <% end %>
+<% else %>
+  <%= turbo_stream.append "mantras-container" do %>
+    <%= render partial: 'mantras/mantra', locals: { mantra: @mantra } %>
+  <% end %>
+<% end %>

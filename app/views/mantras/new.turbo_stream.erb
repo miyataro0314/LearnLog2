@@ -1,0 +1,5 @@
+<%= turbo_stream.replace 'new_mantra' do %>
+  <div class="mb-3" id="new-mantra">
+    <%= render partial: 'mantras/form', locals: { mantra: @mantra } %>
+  </div>
+<% end %>

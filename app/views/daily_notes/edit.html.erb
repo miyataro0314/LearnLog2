@@ -1,0 +1,41 @@
+<% content_for :title do %>
+  <title>DailyNotes edit | LearnLog2</title>
+<% end %>
+
+<%= stylesheet_link_tag 'daily_notes', media: 'all', 'data-turbo-track': 'reload' %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <h1 class="mb-3 mt-3 text-center">DailyNote</h1>
+      <div class="fs-3 mb-5 text-center">
+        <%= @daily_note.date %>
+      </div>
+      <%= form_with model: @daily_note, class: "new_daily_note" do |f| %>
+        <div class="mb-3">
+          <div class="fs-5 mb-3">目標勉強時間</div>
+          <%= render 'daily_notes/goal_radio_button', f: f %>
+        </div>
+        <div>
+          <div class="fs-5 mb-3">今日の一言</div>
+          <div class="form-floating mb-5">
+            <%= f.text_area :quote, class: "form-control", placeholder: 'Quote' %>
+            <%= f.label :quote %>
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="fs-5 mb-3">今日の気分</div>
+          <%= render 'daily_notes/mood_radio_button', f: f %>
+        </div>
+        <div>
+          <div class="fs-5 mb-3">今日の反省</div>
+          <div class="form-floating mb-3">
+            <%= f.text_area :content, class: "form-control", placeholder: 'Content', style: "height: 150px" %>
+            <%= f.label :content %>
+          </div>
+        </div>
+        <%= f.submit 'Submit', class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>

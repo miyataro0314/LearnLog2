@@ -1,0 +1,19 @@
+<h1>編集</h1>
+<%= form_with(model: @log) do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+  <div>
+    <%= f.label :date, "登録日", style: "display: block" %>
+    <%= f.date_field :date %>
+  </div>
+  <div>
+    <%= f.label :start_at, "開始時刻", style: "display: block" %>
+    <%= f.time_field :start_at %>
+  </div>
+  <div>
+    <%= f.label :end_at, "終了時刻", style: "display: block" %>
+    <%= f.time_field :end_at %>
+  </div>
+  <div>
+    <%= f.submit "登録" %>
+  </div>
+<% end %>

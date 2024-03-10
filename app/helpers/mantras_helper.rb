@@ -1,0 +1,2 @@
+module MantrasHelper
+end

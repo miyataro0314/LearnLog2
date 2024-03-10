@@ -1,0 +1,15 @@
+<div class="mb-3 row justify-content-center" id="mantra-form-<%= mantra.id %>">
+  <%= form_with model: mantra, class: 'col-10' do |f| %>
+    <div class="input-group">
+      <div class="form-floating" style="width: 25%;">
+        <%= f.text_field :author, class: "form-control", placeholder: 'Author' %>
+        <%= f.label :author %>
+      </div>
+      <div class="form-floating" style="width: 65%;">
+        <%= f.text_field :body, class: "form-control", placeholder: 'Body' %>
+        <%= f.label :body %>
+      </div>
+        <%= f.submit 'Submit', class:'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>

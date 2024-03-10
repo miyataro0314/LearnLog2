@@ -1,0 +1,12 @@
+<%# 最後の1つを削除した場合、mantras-containerごとreplace、そうでない場合はmantras-containerからremove %>
+<% if current_user.mantras.count == 0 %>
+  <%= turbo_stream.replace "mantras-container" do %>
+    <div class="border row justify-content-center", id="mantras-container">
+      <div class="fs-3 p-3 mt-5 mb-5 col-8 rounded-2 border text-center">
+        お気に入りの名言や座右の銘を登録しましょう！
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <%= turbo_stream.remove "mantra-#{@mantra.id}" %>
+<% end %>

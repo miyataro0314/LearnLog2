@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <title>DailyNotes | LearnLog2</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'daily_notes', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_importmap_tags %>
+    <script>
+    window.process = {env: {}}
+    </script>
+
+  </head>
+
+  <body>
+    <%= render 'shared/flash_message' %>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <h1 class="mb-3 text-center">DailyNote</h1>
+          <div class="fs-3 mb-5 text-center">
+            <%= Date.today %>
+          </div>
+          <%= form_with model: @daily_note, class: "new_daily_note" do |f| %>
+            <%= render "shared/error_messages", object: f.object %>
+            <div class="mb-3">
+              <div class="fs-5 mb-3">目標勉強時間</div>
+              <%= render 'daily_notes/goal_radio_button', f: f %>
+            </div>
+            <div>
+              <div class="fs-5 mb-3">今日の一言</div>
+              <div class="form-floating mb-5">
+                <%= f.text_area :quote, class: "form-control", placeholder: 'Quote', style: { height: '100px' } %>
+                <%= f.label :quote %>
+              </div>
+            </div>
+            <%= f.submit 'Submit', class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <%= render 'shared/footer' %>
+  </body>
+</html>

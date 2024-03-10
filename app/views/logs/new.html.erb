@@ -1,0 +1,27 @@
+<% content_for :title do %>
+  <title>Measure | LearnLog2</title>
+<% end %>
+
+<div class="container pt-3 text-center">
+  <h1 class="mb-3">Measure</h1>
+  <div class="mb-3">
+    <% if @last_log&.end_already? || !current_user.logs.exists? %>
+      <%= link_to("Start", start_log_path, class: 'btn btn-outline-warning', data: {turbo_method: :post})%>
+    <% else %>
+      <%= link_to("Finish", end_log_path, class: 'btn btn-outline-warning', data: {turbo_method: :post})%>
+    <% end %>
+  </div>
+</div>
+
+<div class="container pt-3 text-center">
+  <div class="row row-cols-4 g-2">
+    <% create_formatted_logs(@logs).each do |log| %>
+      <div class="mb-3 px-3 border">
+        <%= log[:index] %><br>
+        <%= log[:start_at] %><br>
+        <%= log[:end_at] %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

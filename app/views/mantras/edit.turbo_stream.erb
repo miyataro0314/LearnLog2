@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "mantra-#{@mantra.id}" do %>
+  <%= render partial: 'mantras/form', locals: { mantra: @mantra } %>
+<% end %>

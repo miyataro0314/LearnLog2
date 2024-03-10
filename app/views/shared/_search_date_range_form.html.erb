@@ -1,0 +1,9 @@
+<%= search_form_for q, url: url, data: { turbo_stream: true } do |f| %>
+  <div class="input-group mb-1">
+    <%= f.date_field :date_gteq, class: 'form-control' %>
+    <span class="input-group-text">~</span>
+    <%= f.date_field :date_lteq_end_of_day, class: 'form-control' %>
+    <%= f.hidden_field :form_type, value: 'date_range_search' %>
+    <%= f.submit 'Search', class: 'btn btn-primary' %>
+  </div>
+<% end %>

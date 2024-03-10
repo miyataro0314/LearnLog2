@@ -1,0 +1,6 @@
+<%= search_form_for q, url: url, data: { turbo_stream: true } do |f| %>
+  <div class="input-group mb-1">
+    <%= f.date_field :date_eq, class: 'form-control' %>
+    <%= f.submit 'Search', class: 'btn btn-primary' %>
+  </div>
+<% end %>

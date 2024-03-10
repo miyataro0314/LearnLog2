@@ -1,0 +1,25 @@
+<% content_for :title do %>
+  <title>Mantra | LearnLog2</title>
+<% end %>
+
+<div class="container px-2">
+  <h1 class="mb-3 text-center">Mantra</h1>
+  <div class="row justify-content-center">
+    <%= render 'form', mantra: @mantra %>
+      <div class="border row justify-content-center", id="mantras-container">
+        <%# @mantrasの有無で初回の表示内容を分岐 %>
+        <% if @mantras.any? %>
+            <% @mantras.each do |mantra| %>
+              <%= render mantra %>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="fs-3 p-3 mt-5 mb-5 col-8 rounded-2 border text-center">
+            お気に入りの名言や座右の銘を登録しましょう！
+          </div>
+      </div>
+    <% end %>
+  <div class='text-center'>
+    <%= link_to 'To Profile', profile_path %>
+  </div>
+</div>

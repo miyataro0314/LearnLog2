@@ -1,0 +1,45 @@
+<%= stylesheet_link_tag 'daily_notes', media: 'all', 'data-turbo-track': 'reload' %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <h1 class="mb-3 text-center">DailyNote</h1>
+      
+      <div class="fs-2 mb-2 text-center">
+        <%= @daily_note.date %>
+      </div>
+      <div class="fs-3 mb-3 text-center">
+        <%= "合計時間 #{@sum_time[:hours]}時間 #{@sum_time[:minutes]}分" %>
+      </div>
+      <div class="border p-4">
+        <div class="mb-3">
+          <div class="fs-5">目標勉強時間：<%= @daily_note.today_goal %>時間</div>
+        </div>
+        <div class="mb-3">
+          <div class="fs-5">今日の一言：<%= @daily_note.quote %></div>
+        </div>
+        <div class="mb-3">
+          <div class="fs-5">今日の気分：<%= @daily_note.mood || '未設定' %></div>
+        </div>
+        <div class="mb-3">
+          <div class="fs-5 mb-3">今日の反省：</div>
+          <%= @daily_note.content || '未設定' %>
+        </div>
+        <div>
+          <%= link_to '編集', edit_daily_note_path(params[:id]), class: 'btn btn-outline-success' %>
+          <%= link_to 'To List', daily_notes_path, class: 'btn btn-outline-info' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container pt-3 text-center">
+  <div class="row row-cols-3 g-2">
+    <% create_formatted_logs(@logs).each do |log| %>
+      <div class="mb-3 px-3 border">
+        <%= log[:index] %><br>
+        <%= log[:start_at] %><br>
+        <%= log[:end_at] %>
+      </div>
+    <% end %>
+  </div>
+</div>

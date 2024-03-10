@@ -1,0 +1,16 @@
+<% time = Log.calc_sum_time(user: current_user, date: daily_note.date) %>
+
+<div class="mb-3 px-3 border mood-<%= daily_note.mood %>">
+  <div id="daily-note-id-<%= daily_note.id %>">
+    <div class="mt-2 mb-1 fs-4">
+      <%= link_to daily_note.date, daily_note_path(daily_note.id) %>  
+    </div>
+    <div class="fs-5 text-center ms-auto">
+      <%= "勉強時間：#{time[:hours]}時間 #{time[:minutes]}分"  %>
+    </div>
+    <div class="fs-5 text-center ms-auto">
+      <%= "目標：#{daily_note.today_goal}時間"%>
+    </div>
+    <p class="fs-6"><%= daily_note.quote %></p>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<% content_for :title do %>
+  <title>Profile - Edit | LearnLog2</title>
+<% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-lg-8 mx-auto">
+      <h1 class="mb-3 mt-3 text-center">Profile</h1>
+      <%= form_with model: @user, url: profile_path, data: {turbo_method: :patch} do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <div class="mb-3">
+          <%= f.label :email, 'メールアドレス', class: 'form-label' %>
+          <%= f.email_field :email, class: 'form-control' %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :name, 'ユーザーネーム', class: 'form-label' %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+        <%= f.fields_for :profile, @profile do |p| %>
+          <div class="mb-3">
+            <%= p.label :week_goal, '週間目標時間', class: 'form-label' %>
+            <%= p.select :week_goal, (30..60).step(5).to_a, { prompt: 'select weekly goal' }, { class: 'form-select' } %>
+          </div>
+          <div class="mb-3">
+            <%= p.label :mantra_config, 'トップページへのmantra表示', class: 'form-label' %>
+            <%= p.select :mantra_config,  ['disabled', 'style1', 'style2'], { prompt: 'select weekly goal' }, { class: 'form-select' } %>
+          </div>
+          <div class="mb-3">
+            <%= p.label :avatar, 'プロフィール画像' %>
+            <%= p.file_field :avatar, class: 'form-control' %>
+            <%= image_tag @profile.avatar_url, size: '300x200' %>
+            <%= p.hidden_field :avatar_cache %>
+          </div>
+        <% end %>
+        <%= f.submit 'Submit', class: 'btn btn-primary', data:{ disable_with: 'Submitting...' } %>
+      <% end %>
+      <div class='text-center'>
+        <%= link_to 'To Profile', profile_path %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<%= turbo_stream.replace "daily-notes-container" do %>
+  <div id="daily-notes-container">
+    <div class="mb-3 text-end">
+      <%= "合計：#{@q.result.count}件" %> 
+    </div>
+    <div class="row row-cols-4 g-2">
+      <%= render partial: 'daily_notes/daily_note_card', collection: @daily_notes, as: :daily_note %>
+    </div>
+    <%= paginate @daily_notes, theme: 'bootstrap-5' %>
+  </div>
+<% end %>

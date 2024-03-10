@@ -1,0 +1,19 @@
+<% content_for :title do %>
+  <title>Dashboard | LearnLog2</title>
+<% end %>
+
+<div class="container pt-3 text-center">
+  <h1>Dashboard</h1>
+  <div class="mb-3">
+    <%= "記録した日数 : #{@days_count}日" %>
+  </div>
+  <div class="mb-3">
+    <%= "目標達成日数 : #{@achieving_goal_date}日" %>
+  </div>
+  <div class="mb-3">
+    <%= "1日平均勉強時間 : #{@daily_average[:hours]}時間#{@daily_average[:minutes]}分" %>
+  </div>
+  <div class="mb-3">
+    <%= "合計勉強時間 : #{@all_sum_time[:hours]}時間#{@all_sum_time[:minutes]}分" %>
+  </div>
+</div>

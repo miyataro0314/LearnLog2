@@ -1,0 +1,10 @@
+<div class="mb-3 px-3 border">
+  <div class="mt-3">ID: <%= log.id %></div>
+  <div><%= log.date %></div>
+  <div>開始時刻：<%= log.decorate.start_time %></div>
+  <div>終了時刻：<%= log.decorate.end_time %></div>
+  <div class="mb-3">
+    <%= link_to '編集', edit_log_path(log), class: 'btn btn-outline-success' %>
+    <%= link_to '削除', log_path(log), class: 'btn btn-outline-danger', data: { turbo_confirm: '削除してよろしいですか?', turbo_method: :delete } %>
+  </div>
+</div>

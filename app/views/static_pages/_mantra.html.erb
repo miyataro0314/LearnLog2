@@ -1,0 +1,10 @@
+<% if current_user.profile.style1? %>
+  <div>
+    <strong><%= author %></strong>
+    <%= body %>
+  </div>
+<% elsif current_user.profile.style2? %>
+  <div>
+    <%= body %>
+  </div>
+<% end %>

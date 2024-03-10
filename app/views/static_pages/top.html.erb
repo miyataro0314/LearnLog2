@@ -1,0 +1,24 @@
+<% content_for :title do %>
+  <title>LearnLog2</title>
+<% end %>
+
+<div class="container">
+  <div class="mb-3 fs-4 align-middle text-center">
+    <div class="mt-3 border">
+      <%= render 'mantra', author: @author, body: @body %>
+    </div>
+  </div>
+  <div class="mb-5 fs-4 text-center">
+    <h2 class="date_today">
+      今日の日付<br>
+      <%= Date.today %>
+    </h2>
+  </div>
+
+  <div class="mb-3 fs-4 text-center">
+    <h3>本日の勉強時間</h3>
+    <div class="timer">
+      <%= "合計時間 #{@today_sum_time[:hours]}時間 #{@today_sum_time[:minutes]}分" %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<% content_for :title do %>
+  <title>Profile - Show | LearnLog2</title>
+<% end %>
+
+<div class="container pt-3">
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+      <h1 class="mb-3 text-center">Profile</h1>
+      <table class="table">
+        <tr>
+          <th scope="row">Email</th>
+          <td><%= current_user.email %></td>
+        </tr>
+        <tr>
+          <th scope="row">Name</th>
+          <td><%= current_user.name %></td>
+        </tr>
+        <tr>
+          <th scope="row">Goal Time / Week</th>
+          <td><%= "#{@profile.week_goal}時間" || '未設定' %></td>
+        </tr>
+        <tr>
+          <th scope="row">トップページのMantra表示</th>
+          <td><%= @profile.mantra_config || '未設定' %></td>
+        </tr>
+        <tr>
+          <th scope="row">Profile Image</th>
+          <td><%= image_tag @profile.avatar_url, class: 'rounded-circle', size: '50x50' %></td>
+        </tr>
+      </table>
+      <div class="mb-3">
+        <%= link_to '編集', edit_profile_path, class: 'btn btn-outline-success float-right' %>
+        <%= link_to 'ユーザーを削除', user_path(current_user.id), class: 'btn btn-outline-danger', data: { turbo_confirm: 'ユーザーを削除すると記録も全て削除されます。本当によろしいですか？', turbo_method: :delete } %>
+      </div>
+    </div>
+  </div>
+</div>
