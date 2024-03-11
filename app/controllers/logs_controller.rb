@@ -66,7 +66,6 @@ class LogsController < ApplicationController
       start_date = params[:q][:date_gteq] || current_user.created_at.to_date
       end_date  = params[:q][:date_lteq_end_of_day] || Date.today
       @sum_time = Log.calc_sum_time(user: current_user, date: start_date..end_date)
-      raise
     else
       @sum_time = Log.calc_sum_time(user: current_user, date: params[:q][:date_eq].to_date)
     end
