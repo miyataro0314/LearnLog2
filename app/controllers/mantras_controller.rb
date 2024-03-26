@@ -1,6 +1,7 @@
+# 名言に関するコントローラ
 class MantrasController < ApplicationController
-rescue_from ActiveRecord::ActiveRecordError, with: :handle_active_record_error
-before_action :set_mantra, only: %i[edit update destroy]
+  rescue_from ActiveRecord::ActiveRecordError, with: :handle_active_record_error
+  before_action :set_mantra, only: %i[edit update destroy]
 
   def index
     @mantra = current_user.mantras.new

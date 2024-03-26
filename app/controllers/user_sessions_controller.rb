@@ -1,6 +1,7 @@
+# ログインに関するコントローラ
 class UserSessionsController < ApplicationController
   skip_before_action :first_access_today?
-  
+
   def new; end
 
   def create

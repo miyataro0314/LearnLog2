@@ -1,10 +1,11 @@
+# 学習記録に関するコントローラ
 class LogsController < ApplicationController
   before_action :require_login
   before_action :set_log, only: %i[edit update destroy]
   before_action :set_last_log, only: %i[new end]
   before_action :set_daily_note, only: :start
   skip_before_action :first_access_today?, only: :end
-  
+
   def new
     @logs = Log.where(date: Date.today)
   end
@@ -36,26 +37,26 @@ class LogsController < ApplicationController
   end
 
   def start
-    if check_log_condition(should_exist: false, message: 'まだ計測が終了していません')
-      log = Log.new(date: Date.today, start_at: Time.current, user: current_user, daily_note: @daily_note)
-      if log.save
-        redirect_to new_log_path, success: '計測を開始しました'
-      else
-        flash.now[:danger] = '計測を開始できませんでした'
-        render :new, status: :unprocessable_entity
-      end
+    return unless check_log_condition(should_exist: false, message: 'まだ計測が終了していません')
+
+    log = Log.new(date: Date.today, start_at: Time.current, user: current_user, daily_note: @daily_note)
+    if log.save
+      redirect_to new_log_path, success: '計測を開始しました'
+    else
+      flash.now[:danger] = '計測を開始できませんでした'
+      render :new, status: :unprocessable_entity
     end
   end
 
   def end
-    if check_log_condition(should_exist: true, message: 'まだ計測が開始されていません')
-      @last_log.end_at = Time.current
-      if @last_log.save
-        redirect_to new_log_path, success: '計測を終了しました'
-      else
-        flash.now[:danger] = '計測を終了できませんでした'
-        render :new, status: :unprocessable_entity
-      end
+    return unless check_log_condition(should_exist: true, message: 'まだ計測が開始されていません')
+
+    @last_log.end_at = Time.current
+    if @last_log.save
+      redirect_to new_log_path, success: '計測を終了しました'
+    else
+      flash.now[:danger] = '計測を終了できませんでした'
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -70,9 +71,9 @@ class LogsController < ApplicationController
       @sum_time = Log.calc_sum_time(user: current_user, date: params[:q][:date_eq].to_date)
     end
   end
-  
+
   private
-  
+
   def log_params
     params.require(:log).permit(%i[start_at end_at])
   end
@@ -98,6 +99,6 @@ class LogsController < ApplicationController
       redirect_to root_path
       return false
     end
-    return true
+    true
   end
 end

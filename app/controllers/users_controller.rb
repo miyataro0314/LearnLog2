@@ -1,6 +1,7 @@
+# ユーザー登録に関するコントローラ
 class UsersController < ApplicationController
   skip_before_action :first_access_today?
-  
+
   def new
     @user = User.new
   end
@@ -22,7 +23,7 @@ class UsersController < ApplicationController
   def destroy
     @user = current_user
     if @user.destroy
-      redirect_to root_path,status: :see_other, success: 'ユーザーを削除しました'
+      redirect_to root_path, status: :see_other, success: 'ユーザーを削除しました'
     else
       flash.now[:danger] = 'ユーザーの削除に失敗しました'
       render :show, status: :unprocessable_entity
@@ -35,6 +36,3 @@ class UsersController < ApplicationController
     params.require(:user).permit(%i[name email password password_confirmation])
   end
 end
-
-
-
