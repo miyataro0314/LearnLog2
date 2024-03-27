@@ -18,10 +18,15 @@
 #
 #  user_id  (user_id => users.id)
 #
-require 'test_helper'
+require 'rails_helper'
 
-class ProfileTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+RSpec.describe Profile, type: :model do
+  describe 'アソシエーションチェック' do
+    it '関連付けられたユーザーが無い時にエラーとなるか' do
+      profile = build(:profile)
+      expect(profile).to be_invalid
+    end
+  end
+  describe 'バリデーションチェック' do
+  end
 end

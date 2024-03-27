@@ -17,8 +17,8 @@
 #
 #  user_id  (user_id => users.id)
 #
-class Mantra < ApplicationRecord
-  belongs_to :user
+require 'rails_helper'
 
-  validates :body, presence: true
+RSpec.describe Mantra, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end

@@ -56,11 +56,12 @@ gem 'sassc'
 gem 'sorcery'
 
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri windows]
+  gem 'factory_bot_rails'
 end
 
 group :development do
+  gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rubocop', require: false
@@ -73,7 +74,7 @@ group :development do
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
+  gem 'rspec-rails'
   gem 'selenium-webdriver'
 end

@@ -17,8 +17,3 @@
 #
 #  user_id  (user_id => users.id)
 #
-class Mantra < ApplicationRecord
-  belongs_to :user
-
-  validates :body, presence: true
-end

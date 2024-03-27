@@ -18,10 +18,9 @@
 #
 #  user_id  (user_id => users.id)
 #
-require 'test_helper'
-
-class ProfileTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+FactoryBot.define do
+  factory :profile do
+    week_goal { '8' }
+    mantra_config { 0 }
+  end
 end

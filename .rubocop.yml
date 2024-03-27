@@ -7,8 +7,10 @@ AllCops:
     - 'db/schema.rb'
     - 'vendor/**/*'
     - 'config/initializers/**/*'
+    - 'lib/**/*'
     - 'bin/*'
     - 'node_modules/**/*'
+    - 'spec/**/*'
 
 # 特定のCopの設定
 Metrics/LineLength:
