@@ -1,3 +1,4 @@
+# デイリーノートに関わるコントローラ
 class DailyNotesController < ApplicationController
   before_action :require_login
   before_action :set_daily_note, only: %i[show edit update]
@@ -9,7 +10,7 @@ class DailyNotesController < ApplicationController
   end
 
   def index
-    @q = current_user.daily_notes&.includes(:logs).ransack(params[:q])
+    @q = current_user.daily_notes&.includes(:logs)&.ransack(params[:q])
     @daily_notes = @q.result.order(created_at: :desc).page(params[:page])
   end
 
@@ -40,7 +41,7 @@ class DailyNotesController < ApplicationController
   end
 
   def search_daily_notes
-    @q = current_user.daily_notes&.includes(:logs).ransack(params[:q])
+    @q = current_user.daily_notes&.includes(:logs)&.ransack(params[:q])
     @daily_notes = @q.result.order(created_at: :desc).page(params[:page])
   end
 

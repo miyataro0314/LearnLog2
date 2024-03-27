@@ -1,3 +1,4 @@
+# ユーザープロフィールに関するコントローラ
 class ProfilesController < ApplicationController
   before_action :set_profile, only: %i[show edit update]
   before_action :set_user, only: %i[edit update]
