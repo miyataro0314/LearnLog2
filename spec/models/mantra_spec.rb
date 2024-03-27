@@ -20,5 +20,10 @@
 require 'rails_helper'
 
 RSpec.describe Mantra, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'アソシエーションチェック' do
+    it '関連付けられたユーザーが無い時にエラーとなるか' do
+      mantra = build(:mantra)
+      expect(mantra).to be_invalid
+    end
+  end
 end

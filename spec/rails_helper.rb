@@ -64,7 +64,7 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   # factory_bot_railsの設定
-  RSpec.configure do |config| # rubocop:disable Lint/ShadowingOuterLocalVariable
+  RSpec.configure do |config|
     config.include FactoryBot::Syntax::Methods
   end
 end

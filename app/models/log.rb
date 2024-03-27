@@ -22,6 +22,7 @@
 #  user_id        (user_id => users.id)
 #
 class Log < ApplicationRecord
+  validates :start_at, presence: true
   validates :end_at, comparison: { greater_than: :start_at, allow_nil: true }
 
   belongs_to :user, foreign_key: 'user_id'

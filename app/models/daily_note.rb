@@ -28,6 +28,8 @@ class DailyNote < ApplicationRecord
   has_many :logs
   belongs_to :user, foreign_key: 'user_id'
 
+  validates :date, presence: true
+  validates :date, uniqueness: true
   validates :today_goal, presence: true
 
   def self.ransackable_attributes(_auth_object = nil)

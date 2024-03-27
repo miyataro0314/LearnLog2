@@ -17,6 +17,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  describe 'アソシエーションチェック' do
+  end
   describe 'バリデーションチェック' do
     context ':email' do
       it '重複している時にエラーとなるか' do

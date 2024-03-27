@@ -20,7 +20,7 @@
 #
 FactoryBot.define do
   factory :profile do
-    week_goal { '8' }
+    week_goal { '40' }
     mantra_config { 0 }
   end
 end

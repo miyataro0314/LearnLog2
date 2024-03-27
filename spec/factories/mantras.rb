@@ -17,3 +17,9 @@
 #
 #  user_id  (user_id => users.id)
 #
+FactoryBot.define do
+  factory :mantra do
+    sequence(:author) { |n| "author#{n}" }
+    sequence(:body) { |n| "mantra_body#{n}" }
+  end
+end

@@ -21,3 +21,10 @@
 #  daily_note_id  (daily_note_id => daily_notes.id)
 #  user_id        (user_id => users.id)
 #
+FactoryBot.define do
+  factory :log do
+    date { Date.today }
+    start_at { Time.current }
+    end_at { Time.current + 1.hour }
+  end
+end

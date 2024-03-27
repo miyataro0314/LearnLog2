@@ -22,3 +22,12 @@
 #
 #  user_id  (user_id => users.id)
 #
+FactoryBot.define do
+  factory :daily_note do
+    content { 'example content' }
+    sequence(:date) { |n| Date.today + n }
+    mood { 1 }
+    quote { 'example quote' }
+    today_goal { '8' }
+  end
+end
