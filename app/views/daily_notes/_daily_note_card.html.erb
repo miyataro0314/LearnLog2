@@ -1,4 +1,4 @@
-<% time = Log.calc_sum_time(user: current_user, date: daily_note.date) %>
+<% time = Log.sum_time(current_user, daily_note.date) %>
 
 <div class="mb-3 px-3 border mood-<%= daily_note.mood %>">
   <div id="daily-note-id-<%= daily_note.id %>">

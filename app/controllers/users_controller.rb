@@ -1,6 +1,6 @@
 # ユーザー登録に関するコントローラ
 class UsersController < ApplicationController
-  skip_before_action :first_access_today?
+  skip_before_action :check_first_access_of_the_day
 
   def new
     @user = User.new

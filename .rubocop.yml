@@ -11,11 +11,16 @@ AllCops:
     - 'bin/*'
     - 'node_modules/**/*'
     - 'spec/**/*'
+    - 'Gemfile'
 
 # 特定のCopの設定
 Metrics/LineLength:
-  # 1行の最大文字数を80から100に変更
-  Max: 100
+  # 1行の最大文字数を80から120に変更
+  Max: 120
+
+Metrics/MethodLength:
+  # 1つのメソッドの最大行数を10から12に変更
+  Max: 12
 
 Style/FrozenStringLiteralComment:
   # frozen_string_literalマジックコメントを要求するルールを無効にする
@@ -23,4 +28,8 @@ Style/FrozenStringLiteralComment:
 
 Documentation:
   # すべてのクラスとモジュールの先頭にドキュメントのコメントを要求するルールを無効にする
+  Enabled: false
+
+Naming/AccessorMethodName:
+  # アクセサメソッド接頭語に関するルールを無効にする
   Enabled: false

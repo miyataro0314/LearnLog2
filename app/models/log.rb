@@ -22,17 +22,22 @@
 #  user_id        (user_id => users.id)
 #
 class Log < ApplicationRecord
-  validates :start_at, presence: true
-  validates :end_at, comparison: { greater_than: :start_at, allow_nil: true }
+  before_validation :set_default_values
 
   belongs_to :user, foreign_key: 'user_id'
   belongs_to :daily_note, foreign_key: 'daily_note_id'
+
+  validates :start_at, presence: true
+  validates :end_at, comparison: { greater_than: :start_at, allow_nil: true }
+
+  scope :today, ->(user) { where(user_id: user.id, date: Date.today) }
+  scope :recorded_dates, ->(user) { where(user_id: user.id).select(:date).distinct }
 
   def end_already?
     !end_at.nil?
   end
 
-  def self.calc_sum_time(user:, date:)
+  def self.sum_time(user, date)
     diff = 0
     user.logs.where(date:).each do |log|
       diff += (log.end_at - log.start_at) unless log.end_at.nil?
@@ -42,11 +47,27 @@ class Log < ApplicationRecord
     { hours:, minutes:, raw: diff }
   end
 
+  def self.daily_average(user)
+    days_count = Log.recorded_dates(user).count
+    all_sum_time = Log.sum_time(user, Log.recorded_dates(user))
+    raw = all_sum_time[:raw] / days_count
+    hours = (raw / 3600).to_i
+    minutes = ((raw % 3600) / 60).to_i
+    { hours:, minutes:, raw: }
+  end
+
   def self.ransackable_attributes(_auth_object = nil)
     %w[date]
   end
 
   def self.ransackable_associations(_auth_object = nil)
     %w[user]
+  end
+
+  private
+
+  def set_default_values
+    self.date ||= Date.today
+    self.start_at ||= Time.current
   end
 end
