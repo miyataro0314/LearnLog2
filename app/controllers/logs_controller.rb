@@ -4,16 +4,16 @@ class LogsController < ApplicationController
   before_action :set_log, only: %i[edit update destroy]
   before_action :set_last_log, only: %i[new end]
   before_action :set_daily_note, only: :start
-  skip_before_action :first_access_today?, only: :end
+  skip_before_action :check_first_access_of_the_day, only: :end
 
   def new
-    @logs = Log.where(date: Date.today)
+    @logs = Log.today(current_user)
   end
 
   def index
     @q = current_user.logs.ransack(params[:q])
     @logs = @q.result.order(created_at: :desc).page(params[:page])
-    @all_sum_time = Log.calc_sum_time(user: current_user, date: current_user.created_at.to_date..Date.today)
+    @all_sum_time = Log.sum_time(current_user, Log.recorded_dates(current_user))
   end
 
   def edit; end
@@ -66,9 +66,9 @@ class LogsController < ApplicationController
     if params[:q][:form_type] == 'date_range_search'
       start_date = params[:q][:date_gteq] || current_user.created_at.to_date
       end_date  = params[:q][:date_lteq_end_of_day] || Date.today
-      @sum_time = Log.calc_sum_time(user: current_user, date: start_date..end_date)
+      @sum_time = Log.sum_time(user: current_user, date: start_date..end_date)
     else
-      @sum_time = Log.calc_sum_time(user: current_user, date: params[:q][:date_eq].to_date)
+      @sum_time = Log.sum_time(user: current_user, date: params[:q][:date_eq].to_date)
     end
   end
 

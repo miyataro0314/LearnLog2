@@ -2,7 +2,7 @@
 class DailyNotesController < ApplicationController
   before_action :require_login
   before_action :set_daily_note, only: %i[show edit update]
-  skip_before_action :first_access_today?, only: %i[new create]
+  skip_before_action :check_first_access_of_the_day, only: %i[new create]
 
   def new
     @daily_note = DailyNote.new
@@ -16,7 +16,7 @@ class DailyNotesController < ApplicationController
 
   def show
     @logs = @daily_note.logs
-    @sum_time = Log.calc_sum_time(user: current_user, date: @daily_note.date)
+    @sum_time = Log.sum_time(user: current_user, date: @daily_note.date)
   end
 
   def edit; end

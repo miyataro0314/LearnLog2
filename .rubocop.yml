@@ -24,3 +24,7 @@ Style/FrozenStringLiteralComment:
 Documentation:
   # すべてのクラスとモジュールの先頭にドキュメントのコメントを要求するルールを無効にする
   Enabled: false
+
+Naming/AccessorMethodName:
+  # アクセサメソッド接頭語に関するルールを無効にする
+  Enabled: false
