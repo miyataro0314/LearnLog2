@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root to: 'static_pages#welcome'
   
-  get 'top', to: 'top_page#new', as: :top
-  get 'dashboard', to: 'static_pages#dashboard', as: :dashboard
+  get 'top', to: 'top_page#show', as: :top
+  get 'dashboard', to: 'dashboard#show', as: :dashboard
 
   get 'login', to: 'user_sessions#new', as: :login
   post 'login', to: 'user_sessions#create'

@@ -16,7 +16,7 @@ class DailyNotesController < ApplicationController
 
   def show
     @logs = @daily_note.logs
-    @sum_time = Log.sum_time(user: current_user, date: @daily_note.date)
+    @sum_time = Log.sum_time(current_user, @daily_note.date)
   end
 
   def edit; end

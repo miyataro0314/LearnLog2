@@ -1,7 +1,7 @@
 class TopPageController < ApplicationController
   before_action :check_first_access_of_the_day
 
-  def new
+  def show
     @logs = Log.today(current_user)
     @today_sum_time = Log.sum_time(current_user, Date.today)
     set_mantra(current_user)
