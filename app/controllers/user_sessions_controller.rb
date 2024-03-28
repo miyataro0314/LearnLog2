@@ -7,7 +7,7 @@ class UserSessionsController < ApplicationController
   def create
     @user = login(params[:email], params[:password])
     if @user
-      redirect_to root_path
+      redirect_to top_path
     else
       flash.now[:danger] = 'ログインに失敗しました。メールアドレスもしくはパスワードが異なります。'
       render :new, status: :unprocessable_entity

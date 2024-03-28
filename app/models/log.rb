@@ -22,11 +22,13 @@
 #  user_id        (user_id => users.id)
 #
 class Log < ApplicationRecord
-  validates :start_at, presence: true
-  validates :end_at, comparison: { greater_than: :start_at, allow_nil: true }
+  before_validation :set_default_values
 
   belongs_to :user, foreign_key: 'user_id'
   belongs_to :daily_note, foreign_key: 'daily_note_id'
+
+  validates :start_at, presence: true
+  validates :end_at, comparison: { greater_than: :start_at, allow_nil: true }
 
   scope :today, ->(user) { where(user_id: user.id, date: Date.today) }
   scope :recorded_dates, ->(user) { where(user_id: user.id).select(:date).distinct }
@@ -60,5 +62,12 @@ class Log < ApplicationRecord
 
   def self.ransackable_associations(_auth_object = nil)
     %w[user]
+  end
+
+  private
+
+  def set_default_values
+    self.date ||= Date.today
+    self.start_at ||= Time.current
   end
 end
